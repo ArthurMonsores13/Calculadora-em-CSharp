@@ -1,7 +1,7 @@
 ﻿ bool PerguntaContinuar()
 {
     Console.Write("Você deseja continuar ou sair? (continuar/sair): ");
-    string resposta = Console.ReadLine().ToLower();
+    string resposta = (Console.ReadLine() ?? "").Trim().ToLower();
 
     if (resposta == "continuar")
     {
@@ -14,8 +14,8 @@
     }
     else
     {
-        Console.WriteLine("Comando inválido. Encerrando programa.");
-        return false;
+        Console.WriteLine("Comando inválido. Tente Novamente!.");
+        return true;
     }
 
 
@@ -32,7 +32,7 @@ double LerNumero(string mensagem)
     do
     {
         Console.Write(mensagem);
-        string entrada = Console.ReadLine();
+        string entrada = (Console.ReadLine()??"").Trim();
 
         valido = double.TryParse(entrada, out numero);
 
@@ -59,68 +59,53 @@ void Programa()
     Console.Write("Bem-vindo a calculadora simples");
     Console.WriteLine("\n***************************");
     
-    double a = LerNumero("Digite primeiro numero:");
-    double b = LerNumero("Digite segundo numero:");
+    double a = LerNumero("Digite o primeiro numero:");
+    double b = LerNumero("Digite o segundo numero:");
 
 
 
 
-    Console.Write("Digite operador que deseja (somar,diminuir,multiplicar ou dividir/digite sair para encerrar:)");
-    string resposta = Console.ReadLine();
+    Console.Write("Digite operação (somar,diminuir,multiplicar,dividir)ou 'sair' para encerrar:)");
+    string resposta = (Console.ReadLine()??"").Trim();
     string validar = resposta.ToLower();
 
-    double soma = a + b;
-    double multiplicar = a * b;
-    double diminuir = a - b;
-    double dividir = a / b;
        
 
-    if(validar == "somar")
-    {
-        Console.WriteLine("Seu resultado é: "+ soma);
-        continuar = PerguntaContinuar();
-
-        }
-        
-        else if(validar == "multiplicar")
+    switch (validar)
         {
-            Console.WriteLine("Seu resultado é: "+ multiplicar);
-            continuar  = PerguntaContinuar();
+            case "somar":
+                Console.WriteLine($"Seu resultado é: {a + b}");
+                continuar = PerguntaContinuar();
+                break;
 
-        }
-        
-        else if(validar == "diminuir")
-        {
-            Console.WriteLine("Seu resultado é: "+ diminuir);
-            continuar = PerguntaContinuar();
+            case "diminuir":
+                Console.WriteLine($"Seu resultado é: {a - b}");
+                continuar = PerguntaContinuar();
+                break;
 
-        }
-        
-        else if(validar == "dividir")
-        {
-            if (a == 0  || b == 0)
-            {
-            Console.WriteLine("Não é possivel a divisao por 0");
-            continuar = PerguntaContinuar();
-            }
-            else
-            {
-            Console.WriteLine("Seu resultado é: " + dividir);
-            continuar = PerguntaContinuar();
-            }
-        }
-        
-        else if(validar == "sair")
-        {
-            continuar = false;
-            Console.WriteLine("Encerrando...");
-        }
+            case "multiplicar":
+                Console.WriteLine($"Seu resultado é: {a * b}");
+                continuar = PerguntaContinuar();
+                break;
 
+            case "dividir":
+                if (b == 0)
+                    Console.WriteLine("Não é possível dividir por 0.");
+                else
+                    Console.WriteLine($"Seu resultado é: {a / b}");
 
-        else
-        {
-            Console.WriteLine("\nComando errado!");
-            continuar = true;
+                continuar = PerguntaContinuar();
+                break;
+
+            case "sair":
+                continuar = false;
+                Console.WriteLine("Encerrando...");
+                break;
+
+            default:
+                Console.WriteLine("Comando errado!");
+                continuar = true;
+                break;
         }
     }while(continuar);
 }
