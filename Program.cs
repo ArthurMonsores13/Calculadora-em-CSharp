@@ -56,7 +56,7 @@ void Programa()
     {
         
     Console.WriteLine("*****************************");
-    Console.Write("Bem-vindo a calculadora simples");
+    Console.Write("Bem-vindo a calculadora simples!!!!");
     Console.WriteLine("\n***************************");
     
     double a = LerNumero("Digite o primeiro numero:");
