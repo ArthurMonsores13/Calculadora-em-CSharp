@@ -61,7 +61,7 @@ void Programa()
     
     double a = LerNumero("Digite o primeiro numero:");
     double b = LerNumero("Digite o segundo numero:");
-
+    
 
 
 
@@ -74,25 +74,26 @@ void Programa()
     switch (validar)
         {
             case "+":
-                Console.WriteLine($"Seu resultado é: {a + b}");
+            int res_soma = math.somar
+                Console.WriteLine($"Seu resultado é: {res_soma}");
                 continuar = PerguntaContinuar();
                 break;
 
             case "-":
-                Console.WriteLine($"Seu resultado é: {a - b}");
+                int resl_sub = math.diminuir
+                Console.WriteLine($"Seu resultado é:");
                 continuar = PerguntaContinuar();
                 break;
 
             case "*":
-                Console.WriteLine($"Seu resultado é: {a * b}");
+                int res_mul = math.multiplicar
+                Console.WriteLine($"Seu resultado é:");
                 continuar = PerguntaContinuar();
                 break;
 
             case "/":
-                if (b == 0)
-                    Console.WriteLine("Não é possível dividir por 0.");
-                else
-                    Console.WriteLine($"Seu resultado é: {a / b}");
+                int res_div = math.dividir
+                COnsole.WriteLine($"Seu resultado é:")
 
                 continuar = PerguntaContinuar();
                 break;
