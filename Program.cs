@@ -47,7 +47,7 @@ double LerNumero(string mensagem)
 }
 
 
-
+//Program
 
 void Programa()
 {
@@ -65,7 +65,7 @@ void Programa()
 
 
 
-    Console.Write("Digite operação (somar,diminuir,multiplicar,dividir)ou 'sair' para encerrar:)");
+    Console.Write("Digite operação (+,-,*,/)ou 'sair' para encerrar:)");
     string resposta = (Console.ReadLine()??"").Trim();
     string validar = resposta.ToLower();
 
@@ -73,22 +73,22 @@ void Programa()
 
     switch (validar)
         {
-            case "somar":
+            case "+":
                 Console.WriteLine($"Seu resultado é: {a + b}");
                 continuar = PerguntaContinuar();
                 break;
 
-            case "diminuir":
+            case "-":
                 Console.WriteLine($"Seu resultado é: {a - b}");
                 continuar = PerguntaContinuar();
                 break;
 
-            case "multiplicar":
+            case "*":
                 Console.WriteLine($"Seu resultado é: {a * b}");
                 continuar = PerguntaContinuar();
                 break;
 
-            case "dividir":
+            case "/":
                 if (b == 0)
                     Console.WriteLine("Não é possível dividir por 0.");
                 else
