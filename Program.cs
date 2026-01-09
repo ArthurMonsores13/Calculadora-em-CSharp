@@ -1,114 +1,141 @@
-﻿ bool PerguntaContinuar()
+﻿using System;
+
+namespace CalculadoraEmCSharp
 {
-    Console.Write("Você deseja continuar ou sair? (continuar/sair): ");
-    string resposta = (Console.ReadLine() ?? "").Trim().ToLower();
-
-    if (resposta == "continuar")
+    public class MathOperations
     {
-        return true;
-    }
-    else if (resposta == "sair")
-    {
-        Console.WriteLine("Programa encerrado..");
-        return false;
-    }
-    else
-    {
-        Console.WriteLine("Comando inválido. Tente Novamente!.");
-        return true;
-    }
-
-
-}
-
-
-
-
-double LerNumero(string mensagem)
-{
-    double numero;
-    bool valido;
-
-    do
-    {
-        Console.Write(mensagem);
-        string entrada = (Console.ReadLine()??"").Trim();
-
-        valido = double.TryParse(entrada, out numero);
-
-        if (!valido)
+        public double Somar(double a, double b)
         {
-            Console.WriteLine("Valor inválido. Digite um número válido.");
+            return a + b;
         }
 
-    } while (!valido);
-
-    return numero;
-}
-
-
-//Program
-
-void Programa()
-{
-   bool continuar = true;
-    do
-    {
-        
-    Console.WriteLine("*****************************");
-    Console.Write("Bem-vindo a calculadora simples");
-    Console.WriteLine("\n***************************");
-    
-    double a = LerNumero("Digite o primeiro numero:");
-    double b = LerNumero("Digite o segundo numero:");
-    
-
-
-
-    Console.Write("Digite operação (+,-,*,/)ou 'sair' para encerrar:)");
-    string resposta = (Console.ReadLine()??"").Trim();
-    string validar = resposta.ToLower();
-
-       
-
-    switch (validar)
+        public double Diminuir(double a, double b)
         {
-            case "+":
-            int res_soma = math.somar
-                Console.WriteLine($"Seu resultado é: {res_soma}");
-                continuar = PerguntaContinuar();
-                break;
-
-            case "-":
-                int resl_sub = math.diminuir
-                Console.WriteLine($"Seu resultado é:");
-                continuar = PerguntaContinuar();
-                break;
-
-            case "*":
-                int res_mul = math.multiplicar
-                Console.WriteLine($"Seu resultado é:");
-                continuar = PerguntaContinuar();
-                break;
-
-            case "/":
-                int res_div = math.dividir
-                COnsole.WriteLine($"Seu resultado é:")
-
-                continuar = PerguntaContinuar();
-                break;
-
-            case "sair":
-                continuar = false;
-                Console.WriteLine("Encerrando...");
-                break;
-
-            default:
-                Console.WriteLine("Comando errado!");
-                continuar = true;
-                break;
+            return a - b;
         }
-    }while(continuar);
+
+        public double Multiplicar(double a, double b)
+        {
+            return a * b;
+        }
+
+        public double Dividir(double a, double b)
+        {
+            if (b == 0)
+            {
+                throw new DivideByZeroException("Não é possível divisão por 0");
+            }
+            return a / b;
+        }
+    }
+
+    class Program
+    {
+        static bool PerguntaContinuar()
+        {
+            Console.Write("Você deseja continuar ou sair? (continuar/sair): ");
+            string resposta = (Console.ReadLine() ?? "").Trim().ToLower();
+
+            if (resposta == "continuar")
+            {
+                return true;
+            }
+            else if (resposta == "sair")
+            {
+                Console.WriteLine("Programa encerrado..");
+                return false;
+            }
+            else
+            {
+                Console.WriteLine("Comando inválido. Tente Novamente!.");
+                return true;
+            }
+        }
+
+        static double LerNumero(string mensagem)
+        {
+            double numero;
+            bool valido;
+
+            do
+            {
+                Console.Write(mensagem);
+                string entrada = (Console.ReadLine() ?? "").Trim();
+
+                valido = double.TryParse(entrada, out numero);
+
+                if (!valido)
+                {
+                    Console.WriteLine("Valor inválido. Digite um número válido.");
+                }
+
+            } while (!valido);
+
+            return numero;
+        }
+
+        static void Main(string[] args)
+        {
+            bool continuar = true;
+            MathOperations math = new MathOperations();
+
+            do
+            {
+                Console.WriteLine("*****************************");
+                Console.Write("Bem-vindo a calculadora simples");
+                Console.WriteLine("\n***************************");
+
+                double a = LerNumero("Digite o primeiro numero:");
+                double b = LerNumero("Digite o segundo numero:");
+
+                Console.Write("Digite operação (+,-,*,/)ou 'sair' para encerrar:)");
+                string resposta = (Console.ReadLine() ?? "").Trim();
+                string validar = resposta.ToLower();
+
+                switch (validar)
+                {
+                    case "+":
+                        double res_soma = math.Somar(a, b);
+                        Console.WriteLine($"Seu resultado é: {res_soma}");
+                        continuar = PerguntaContinuar();
+                        break;
+
+                    case "-":
+                        double res_sub = math.Diminuir(a, b);
+                        Console.WriteLine($"Seu resultado é: {res_sub}");
+                        continuar = PerguntaContinuar();
+                        break;
+
+                    case "*":
+                        double res_mul = math.Multiplicar(a, b);
+                        Console.WriteLine($"Seu resultado é: {res_mul}");
+                        continuar = PerguntaContinuar();
+                        break;
+
+                    case "/":
+                        try
+                        {
+                            double res_div = math.Dividir(a, b);
+                            Console.WriteLine($"Seu resultado é: {res_div}");
+                        }
+                        catch (DivideByZeroException ex)
+                        {
+                            Console.WriteLine(ex.Message);
+                        }
+                        continuar = PerguntaContinuar();
+                        break;
+
+                    case "sair":
+                        continuar = false;
+                        Console.WriteLine("Encerrando...");
+                        break;
+
+                    default:
+                        Console.WriteLine("Comando errado!");
+                        continuar = true;
+                        break;
+                }
+            } while (continuar);
+        }
+    }
 }
-    
-Programa();
